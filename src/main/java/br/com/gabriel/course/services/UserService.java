@@ -1,19 +1,17 @@
 package br.com.gabriel.course.services;
 
-import java.util.List;
-import java.util.Optional;
-
-import javax.persistence.EntityNotFoundException;
-
+import br.com.gabriel.course.entities.User;
+import br.com.gabriel.course.repositories.UserRepository;
 import br.com.gabriel.course.services.exceptions.DatabaseException;
 import br.com.gabriel.course.services.exceptions.ResourceNotFoundException;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
-import br.com.gabriel.course.entities.User;
-import br.com.gabriel.course.repositories.UserRepository;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService {

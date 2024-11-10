@@ -1,16 +1,18 @@
 package br.com.gabriel.course.entities.pk;
 
+import java.io.Serial;
 import java.io.Serializable;
 
-import javax.persistence.Embeddable;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 
 import br.com.gabriel.course.entities.Product;
 import br.com.gabriel.course.entities.Order;
+import jakarta.persistence.Embeddable;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 @Embeddable
 public class OrderItemPK implements Serializable{
+	@Serial
 	private static final long serialVersionUID = 1L;
 	
 	@ManyToOne
