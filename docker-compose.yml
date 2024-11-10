@@ -1,0 +1,34 @@
+version: '3'
+services:
+  springboot_course_db:
+    image: postgres:latest
+    container_name: springboot_course_db
+    shm_size: 128mb
+    environment:
+      POSTGRES_DB: springboot_course_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123456
+    ports:
+      - "5432:5432"
+    networks:
+      - springboot_course
+
+  springboot_course_service:
+    build: .
+    container_name: springboot_course_service
+    depends_on:
+      - springboot_course_db
+    environment:
+      - DB_HOST=springboot_course_db
+      - DB_NAME=springboot_course_db
+      - DB_PORT=5432
+      - DB_USER=postgres
+      - DB_PASSWORD=123456
+    ports:
+      - "8080:8080"
+    networks:
+      - springboot_course
+
+networks:
+  springboot_course:
+    driver: bridge

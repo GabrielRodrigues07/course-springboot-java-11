@@ -11,13 +11,12 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 
-	<groupId>com.example-teste</groupId>
-	<artifactId>course</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<groupId>br.com.gabriel.course</groupId>
+	<artifactId>spring-boot-course</artifactId>
+	<version>1.0.0</version>
 	<name>course</name>
-	<description>Demo project for Spring Boot</description>
 	<properties>
-		<java.version>11</java.version>
+		<java.version>17</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
