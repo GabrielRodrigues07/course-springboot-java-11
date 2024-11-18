@@ -2,10 +2,7 @@ package br.com.gabriel.course.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -16,7 +13,10 @@ import java.util.Set;
 @Table(name = "tb_category")
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+@Builder
+@Getter
+@Setter
+@ToString
 @EqualsAndHashCode
 public class Category implements Serializable {
 
@@ -31,10 +31,4 @@ public class Category implements Serializable {
     @JsonIgnore
     @ManyToMany(mappedBy = "categories")
     private Set<Product> products = new HashSet<>();
-
-    public Category(Long id, String name) {
-        super();
-        this.id = id;
-        this.name = name;
-    }
 }

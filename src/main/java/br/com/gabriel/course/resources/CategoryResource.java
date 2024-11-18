@@ -1,5 +1,6 @@
 package br.com.gabriel.course.resources;
 
+import br.com.gabriel.course.dto.CategoryDTO;
 import br.com.gabriel.course.entities.Category;
 import br.com.gabriel.course.services.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,15 +20,15 @@ public class CategoryResource {
     private CategoryService service;
 
     @GetMapping
-    public ResponseEntity<List<Category>> findAll() {
-        List<Category> list = service.findAll();
+    public ResponseEntity<List<CategoryDTO>> findAll() {
+        List<CategoryDTO> list = service.findAll();
 
         return ResponseEntity.ok().body(list);
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Category> findById(@PathVariable Long id) {
-        Category obj = service.findById(id);
+    public ResponseEntity<CategoryDTO> findById(@PathVariable Long id) {
+        CategoryDTO obj = service.findById(id);
         return ResponseEntity.ok().body(obj);
     }
 }

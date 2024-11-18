@@ -1,6 +1,6 @@
 package br.com.gabriel.course.resources;
 
-import br.com.gabriel.course.entities.Order;
+import br.com.gabriel.course.dto.OrderDTO;
 import br.com.gabriel.course.services.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,15 +19,15 @@ public class OrderResource {
     private OrderService service;
 
     @GetMapping
-    public ResponseEntity<List<Order>> findAll() {
-        List<Order> list = service.findAll();
+    public ResponseEntity<List<OrderDTO>> findAll() {
+        List<OrderDTO> list = service.findAll();
 
         return ResponseEntity.ok().body(list);
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Order> findById(@PathVariable Long id) {
-        Order obj = service.findById(id);
+    public ResponseEntity<OrderDTO> findById(@PathVariable Long id) {
+        OrderDTO obj = service.findById(id);
         return ResponseEntity.ok().body(obj);
     }
 }

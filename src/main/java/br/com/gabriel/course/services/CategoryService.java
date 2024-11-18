@@ -2,7 +2,10 @@ package br.com.gabriel.course.services;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
+import br.com.gabriel.course.dto.CategoryDTO;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,15 +15,20 @@ import br.com.gabriel.course.repositories.CategoryRepository;
 @Service
 public class CategoryService {
 
+	private final ModelMapper modelMapper = new ModelMapper();
+
 	@Autowired
 	private CategoryRepository repository;
 	
-	public List<Category> findAll() {
-		return repository.findAll();
+	public List<CategoryDTO> findAll() {
+		return repository.findAll()
+				.stream()
+				.map(category -> modelMapper.map(category, CategoryDTO.class))
+				.collect(Collectors.toList());
 	}
 	
-	public Category findById(Long id) {
+	public CategoryDTO findById(Long id) {
 		Optional<Category> obj = repository.findById(id);
-		return obj.get();
+		return modelMapper.map(obj.get(), CategoryDTO.class);
 	}
 }

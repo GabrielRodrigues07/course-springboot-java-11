@@ -1,38 +1,37 @@
 package br.com.gabriel.course.resources;
 
-import br.com.gabriel.course.entities.User;
+import br.com.gabriel.course.dto.UserDTO;
 import br.com.gabriel.course.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.lang.annotation.Annotation;
 import java.net.URI;
 import java.util.List;
 
 @RestController
 @RequestMapping(value = "/users")
-public class UserResource implements Annotation {
+public class UserResource {
 
     @Autowired
     private UserService service;
 
     @GetMapping
-    public ResponseEntity<List<User>> findAll() {
-        List<User> list = service.findAll();
+    public ResponseEntity<List<UserDTO>> findAll() {
+        List<UserDTO> list = service.findAll();
 
         return ResponseEntity.ok().body(list);
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<User> findById(@PathVariable Long id) {
-        User obj = service.findById(id);
+    public ResponseEntity<UserDTO> findById(@PathVariable Long id) {
+        UserDTO obj = service.findById(id);
         return ResponseEntity.ok().body(obj);
     }
 
     @PostMapping
-    public ResponseEntity<User> insert(@RequestBody User obj) {
+    public ResponseEntity<UserDTO> insert(@RequestBody UserDTO obj) {
         obj = service.insert(obj);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
         return ResponseEntity.created(uri).body(obj);
@@ -45,28 +44,8 @@ public class UserResource implements Annotation {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<User> update(@PathVariable Long id, @RequestBody User obj) {
+    public ResponseEntity<UserDTO> update(@PathVariable Long id, @RequestBody UserDTO obj) {
         obj = service.update(id, obj);
         return ResponseEntity.ok().body(obj);
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        return false;
-    }
-
-    @Override
-    public int hashCode() {
-        return 0;
-    }
-
-    @Override
-    public String toString() {
-        return null;
-    }
-
-    @Override
-    public Class<? extends Annotation> annotationType() {
-        return null;
     }
 }
