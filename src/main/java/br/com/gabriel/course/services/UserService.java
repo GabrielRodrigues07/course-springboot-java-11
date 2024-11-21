@@ -57,7 +57,7 @@ public class UserService {
 
     public UserDTO update(Long id, UserDTO obj) {
         try {
-            User entity = repository.getOne(id);
+            User entity = repository.getReferenceById(id);
             updateData(entity, obj);
             return modelMapper.map(repository.save(entity), UserDTO.class);
         } catch (EntityNotFoundException e) {
@@ -66,8 +66,8 @@ public class UserService {
     }
 
     private void updateData(User entity, UserDTO obj) {
-        entity.setName(obj.getName());
-        entity.setEmail(obj.getEmail());
-        entity.setPhone(obj.getPhone());
+        Optional.ofNullable(obj.getName()).ifPresent(entity::setName);
+        Optional.ofNullable(obj.getEmail()).ifPresent(entity::setEmail);
+        Optional.ofNullable(obj.getPhone()).ifPresent(entity::setPhone);
     }
 }
